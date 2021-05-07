@@ -12,13 +12,7 @@ public class TurtleGuardController : Actor
     {
         sGuardResting = new GuardResting(this);
         sGuardWalking = new GuardWalking(this);
+        sGuardResting.OnEnterState();
     }
 
- 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

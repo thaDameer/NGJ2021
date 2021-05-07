@@ -41,9 +41,13 @@ public class ChairController : MonoBehaviour
         }
         if (rightKeyHold)
         {
+            var testVelocity = pivot.transform.forward * myRigidbody.velocity.magnitude;
+            myRigidbody.velocity = testVelocity;
             pivot.transform.Rotate(pivot.up * rotationSpeed);
         }else if (leftKeyHold)
         {
+            var testVelocity = pivot.transform.forward * myRigidbody.velocity.magnitude;
+            myRigidbody.velocity = testVelocity;
             pivot.transform.Rotate(pivot.up*-rotationSpeed);
         }
     }
