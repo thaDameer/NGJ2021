@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class ChairController : MonoBehaviour
@@ -14,10 +15,16 @@ public class ChairController : MonoBehaviour
     public KeyCode rightKey;
     public KeyCode upKey;
     public KeyCode downKey;
+    public KeyCode boostKey;
     private bool leftKeyHold;
     private bool rightKeyHold;
     private bool upKeyHold;
     private bool downKeyHold;
+    private bool boostHold;
+
+    private float speed;
+    bool isAccelerating;
+    public float boost = 5;
     
     private void Update()
     {
@@ -25,19 +32,36 @@ public class ChairController : MonoBehaviour
         rightKeyHold = Input.GetKey(rightKey);
         upKeyHold = Input.GetKey(upKey);
         downKeyHold = Input.GetKey(downKey);
-
+        boostHold = Input.GetKey(boostKey);
+        if (boostHold)
+            speed = moveSpeed + boost;
+        else
+            speed = moveSpeed;
+        
         var spherePos = myRigidbody.transform.position;
         chairObject.position = myRigidbody.transform.position;
     }
 
     private void FixedUpdate()
     {
+        
         if (upKeyHold)
         {
-            myRigidbody.AddForce(pivot.transform.forward * moveSpeed);
+            isAccelerating = true;
+            myRigidbody.AddForce(pivot.transform.forward * speed);
         }else if (downKeyHold)
         {
-            myRigidbody.AddForce(pivot.transform.forward * -moveSpeed);
+            isAccelerating = true;
+            myRigidbody.AddForce(pivot.transform.forward * -speed);
+        }
+        else
+            isAccelerating = false;
+
+        if (!isAccelerating)
+        {
+            var decelerate = ;
+            
+            myRigidbody.velocity -= 0.95f * myRigidbody.velocity;
         }
         if (rightKeyHold)
         {
