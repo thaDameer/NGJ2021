@@ -8,6 +8,8 @@ public class GoodRayBooster : MonoBehaviour
     [SerializeField] private Collider boostCollider;
     [SerializeField] private Animator goodRayAnimator;
     private bool isTriggered = false;
+    [SerializeField] private AudioSource AudioSource;
+    [SerializeField] private AudioClip appearClip, disappearClip, boostClip;
 
     private void Start()
     {
@@ -16,17 +18,22 @@ public class GoodRayBooster : MonoBehaviour
 
     public void ActiveGoodRay()
     {
-        
+        if(appearClip && AudioSource)
+            AudioSource.clip = boostClip;
     }
 
     public void TurnOffGoodRay()
     {
-        
+        if(disappearClip && AudioSource)
+            AudioSource.clip = boostClip;
     }
 
     public void PlayBoostEffect()
     {
         goodRayAnimator.SetTrigger("Boost");
+        if(boostClip && AudioSource)
+            AudioSource.clip = boostClip;
+        
         isTriggered = true;
     }
     private void OnTriggerEnter(Collider other)

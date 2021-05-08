@@ -65,12 +65,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   variables: {fileID: 11400000, guid: 6e3ff4f4bd1e4ac47b2ca28df9311ffa, type: 2}
-  upKey: 273
-  downKey: 274
-  leftKey: 276
-  rightKey: 275
+  upKey: 105
+  downKey: 107
+  leftKey: 106
+  rightKey: 108
   myRigidbody: {fileID: 1296000836856935845}
   isMoving: 0
+  canBePickedUp: 0
+  currentEnergy: 0
+  isThrown: 0
 --- !u!1 &1296000837118409350
 GameObject:
   m_ObjectHideFlags: 0

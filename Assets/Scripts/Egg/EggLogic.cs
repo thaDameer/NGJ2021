@@ -20,7 +20,7 @@ public class EggLogic : MonoBehaviour
     [SerializeField]private EggState eggState;
     [SerializeField] private float minSpawnTime, maxSpawnTime;
     [SerializeField] private Animator eggAnimator;
-
+    [SerializeField] private Turtle turtlePrefab;
 
     public int eggHealth = 3;
     [SerializeField] private GameObject sandIcon;
@@ -60,6 +60,9 @@ public class EggLogic : MonoBehaviour
         eggState = EggState.EggHatching;
         eggAnimator.SetTrigger("EggHatch");
         yield return new WaitForSeconds(0.5f);
+        var turtleClone = Instantiate(turtlePrefab);
+        turtleClone.transform.position = transform.position;
+        turtleClone.SpawnTurtle();
         //spawn turtle
     }
 }

@@ -131,10 +131,20 @@ public class ChairController : MonoBehaviour
 
         if (!isAccelerating)
         {
-            var decelerate = (myRigidbody.velocity*decelerateValue);
-
-            decelerate.y = myRigidbody.velocity.y;
-            myRigidbody.velocity = decelerate;
+            if (isBoosted)
+            {
+                if (upKeyHold)
+                {
+                    var velocity = myRigidbody.velocity.magnitude * pivot.transform.forward;
+                    var yVel = myRigidbody.velocity.y;
+                    myRigidbody.velocity = new Vector3(velocity.x, yVel, velocity.z);
+                }else if (downKeyHold)
+                {
+                    
+                }
+               
+            }
+            
         }
         RotateChair();
     }

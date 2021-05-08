@@ -6,7 +6,7 @@ using UnityEngine;
 public class GuardWalking : State
 {
     private TurtleGuardController actor;
-    private float duration = 2f;
+    private float duration = 1.1f;
     private float timer = 0;
     private bool timerComplete = false;
     public GuardWalking(TurtleGuardController actor) : base(actor)

@@ -10,16 +10,20 @@ public class PickUpCollider : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.GetComponentInParent<TurtleGuardController>())
         {
             turtleGuardInZone = true;
+            
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponentInParent<TurtleGuardController>())
+        var guard = other.GetComponentInParent<TurtleGuardController>();
+        if (guard)
         {
+            
             turtleGuardInZone = false;
         }
     }

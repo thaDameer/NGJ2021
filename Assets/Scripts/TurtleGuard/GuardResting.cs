@@ -31,5 +31,12 @@ public class GuardResting : State
         actor.GainingEnergy();
     }
 
- 
+    public override void OnCollisionEnter(Collision coll)
+    {
+        base.OnCollisionEnter(coll);
+        if(actor.isThrown)
+            actor.sGuardWalking.OnEnterState();
+    }
+
+   
 }

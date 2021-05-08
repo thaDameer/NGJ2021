@@ -70,11 +70,32 @@ public class TurtleGuardController : Actor
             collider.enabled = isActive;
         }
     }
+
+    IEnumerator ThrowDelay_CO()
+    {
+        yield return new WaitForSeconds(0.3f);
+        ToggleGuardColliders(true);
+    }
     public void PutDownGuard(Transform chairObject)
     {
         transform.parent = null;
-        var guardPos = (chairObject.transform.forward * 1.5f + chairObject.transform.position);
-        transform.position = guardPos;
+        var throwDirection = chairObject.transform.forward;
+        throwDirection.y += 0.3f;
+        myRigidbody.isKinematic = false;
+        myRigidbody.AddForce(throwDirection * 10,ForceMode.Impulse);
+        isThrown = true;
+        StartCoroutine(ThrowDelay_CO());
+        //var guardPos = (chairObject.transform.forward * 1.5f + chairObject.transform.position);
+        //transform.position = guardPos;
+
+
+    }
+
+    public bool isThrown;
+    IEnumerator GuardThrow_CO()
+    {
+        
+        yield return new WaitForSeconds(0.5f);
         sGuardWalking.OnEnterState();
     }
     private void ControllerInputs()
