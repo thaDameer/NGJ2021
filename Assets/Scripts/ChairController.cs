@@ -25,7 +25,8 @@ public class ChairController : MonoBehaviour
     private float speed;
     bool isAccelerating;
     public float boost = 5;
-    
+    [Range(0.1f,0.99f)]
+    public float decelerateValue;
     private void Update()
     {
         leftKeyHold = Input.GetKey(leftKey);
@@ -59,14 +60,25 @@ public class ChairController : MonoBehaviour
 
         if (!isAccelerating)
         {
-            var decelerate = ;
-            
-            myRigidbody.velocity -= 0.95f * myRigidbody.velocity;
+            var decelerate = (myRigidbody.velocity*decelerateValue);
+
+            decelerate.y = myRigidbody.velocity.y;
+            myRigidbody.velocity -= decelerate;
         }
+        RotateChair();
+    }
+
+    private void RotateChair()
+    {
+        
         if (rightKeyHold)
         {
             var testVelocity = pivot.transform.forward * myRigidbody.velocity.magnitude;
-            myRigidbody.velocity = testVelocity;
+            // myRigidbody.velocity = testVelocity;
+            // var rotation = Quaternion.Euler(pivot.up * rotationSpeed);
+            // rotation.x = 0;
+            // rotation.z = 0;
+            // pivot.transform.rotation = Quaternion.Slerp(pivot.transform.rotation,rotation,1 * Time.fixedTime);
             pivot.transform.Rotate(pivot.up * rotationSpeed);
         }else if (leftKeyHold)
         {
@@ -74,10 +86,5 @@ public class ChairController : MonoBehaviour
             myRigidbody.velocity = testVelocity;
             pivot.transform.Rotate(pivot.up*-rotationSpeed);
         }
-    }
-
-    private void RotateChair()
-    {
-        
     }
 }
