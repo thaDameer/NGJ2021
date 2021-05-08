@@ -1008,6 +1008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guardTransform: {fileID: 557187924}
   chairTransform: {fileID: 347368457}
+  zOffset: -15
 --- !u!4 &916265888
 Transform:
   m_ObjectHideFlags: 0
@@ -1234,7 +1235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.21703592, y: -0, z: -0, w: 0.9761636}
-  m_LocalPosition: {x: 0.3, y: 8.583828, z: -18.4}
+  m_LocalPosition: {x: 0.3, y: 8.583828, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 916265888}

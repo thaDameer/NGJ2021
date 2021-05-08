@@ -116,11 +116,15 @@ public class ChairController : MonoBehaviour
         if (upKeyHold)
         {
             isAccelerating = true;
-            myRigidbody.velocity = pivot.transform.forward * currentSpeed;
+            var velocity = pivot.transform.forward * currentSpeed;
+            velocity.y = myRigidbody.velocity.y;
+            myRigidbody.velocity = velocity;
         }else if (downKeyHold)
         {
             isAccelerating = true;
-            myRigidbody.velocity = pivot.transform.forward *-currentSpeed;
+            var velocity = pivot.transform.forward * -currentSpeed;
+            velocity.y = myRigidbody.velocity.y;
+            myRigidbody.velocity = velocity;
         }
         else
             isAccelerating = false;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform guardTransform, chairTransform;
-    
+    [SerializeField] private float zOffset;
     void Start()
     {
         
@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         Vector3 middleCalculation = (guardTransform.position + chairTransform.position) / 2;
-        
+        middleCalculation.z += zOffset;
         transform.position = middleCalculation;
     }
 }
