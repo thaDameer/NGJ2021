@@ -135,6 +135,8 @@ MonoBehaviour:
   appearClip: {fileID: 0}
   disappearClip: {fileID: 0}
   boostClip: {fileID: 0}
+  activeTime: 8
+  godRayActive: 0
 --- !u!135 &1848162092590731806
 SphereCollider:
   m_ObjectHideFlags: 0

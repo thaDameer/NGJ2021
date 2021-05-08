@@ -6,7 +6,7 @@ using UnityEngine;
 public class GuardWalking : State
 {
     private TurtleGuardController actor;
-    private float duration = 1.1f;
+    private float duration = 0.6f;
     private float timer = 0;
     private bool timerComplete = false;
     public GuardWalking(TurtleGuardController actor) : base(actor)
@@ -25,6 +25,7 @@ public class GuardWalking : State
     public override void OnEnterState()
     {
         base.OnEnterState();
+        actor.animator.SetTrigger("isMoving");
         timer = 0;
         actor.canBePickedUp = false;
     }
@@ -57,12 +58,51 @@ public class GuardWalking : State
     }
     private void Movement()
     {
+        
+        MovementAnimations();
         var velocity = actor.controllerVector.normalized * actor.GetGuardSpeed();
         var yVelocity = actor.myRigidbody.velocity.y;
         
         actor.myRigidbody.velocity = new Vector3(velocity.x, yVelocity,velocity.z);
     }
-  
-    
-      
+
+    private float transitionToWalk = 0;
+    private float transitionToIdle = 0;
+    private float transitionDuration = 0.5f;
+
+    void MovementAnimations()
+    {
+        if (actor.isMoving)
+        {
+            transitionToIdle = 0;
+            var animationLerp = 1;
+            transitionToWalk += Time.deltaTime;
+            if (transitionToWalk < transitionDuration)
+            {
+                var percent = transitionToWalk / transitionDuration;
+                actor.animator.SetFloat("movement",Mathf.Lerp(0,1,percent));
+            }
+            else
+            {
+                actor.animator.SetFloat("movement",1);
+            }
+        }
+        else
+        {
+            transitionToWalk = 0;
+            var animationLerp = 0;
+            transitionToIdle += Time.deltaTime;
+            if (transitionToIdle < transitionDuration)
+            {
+                var percent = transitionToIdle / transitionDuration;
+                actor.animator.SetFloat("movement",Mathf.Lerp(1,0,percent));
+            }
+            else
+            {
+                actor.animator.SetFloat("movement",0);
+            }
+        }
+        
+        actor.animator.SetFloat("energyLevel",actor.GetEnergyPercent());
+    }
 }

@@ -16,6 +16,8 @@ public class GuardResting : State
         base.OnEnterState();
         actor.ToggleGuardColliders(false);
         actor.myRigidbody.isKinematic = true;
+        actor.sleepParticle.Play();
+        actor.animator.SetTrigger("isResting");
     }
 
     public override void OnExitState()
@@ -23,6 +25,7 @@ public class GuardResting : State
         base.OnExitState();
         actor.ToggleGuardColliders(true);
         actor.myRigidbody.isKinematic = false;
+        actor.sleepParticle.Stop();
     }
 
     public override void FixedUpdate()

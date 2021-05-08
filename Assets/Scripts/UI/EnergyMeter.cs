@@ -14,6 +14,7 @@ public class EnergyMeter : MonoBehaviour
     private Color currentColor;
     private bool isDraining;
     private bool isResting;
+    private bool isAttacking;
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -22,18 +23,40 @@ public class EnergyMeter : MonoBehaviour
     
     public void UpdateEnergyDrain(float percent,Transform characterTransform)
     {
-        if (!isDraining)
+        if (!isDraining && !isAttacking)
         {
             energyMeter.DOColor(drainingColor, 0.3f);
             
             isResting = false;
             isDraining = true;
         }
-        
-        energyMeter.fillAmount = percent;
+        if(!isAttacking)
+            energyMeter.fillAmount = percent;
+        else
+        {
+            timer += Time.deltaTime;
+            if (timer > attackDuration)
+                isAttacking = false;
+            energyMeter.fillAmount = percent;
+        }
         //FocusAtCharacter(characterTransform);
     }
 
+    private float timer;
+    private float attackDuration = 0.5f;
+    public void UpdateAttackDrain(float percent)
+    {
+        if (!isAttacking)
+        {
+            energyMeter.DOColor(attackingColor, 0.3f);
+            isResting = false;
+            isDraining = false;
+            isAttacking = true;
+            timer = 0;
+        }
+
+        
+    }
     public void UpdateRestingMeter(float percent, Transform characterTransform)
     {
         if (!isResting)

@@ -29,4 +29,9 @@ public class UIManager : MonoBehaviour
     {
         guardEnergyMeter.UpdateRestingMeter(percent,characterTransform);
     }
+
+    public void UpdateAttackMeter(float percent)
+    {
+        guardEnergyMeter.UpdateAttackDrain(percent);
+    }
 }

@@ -15,14 +15,14 @@ public class ChairController : MonoBehaviour
     public KeyCode rightKey;
     public KeyCode upKey;
     public KeyCode downKey;
-    public KeyCode boostKey;
     public KeyCode interactButton;
     private bool leftKeyHold;
     private bool rightKeyHold;
     private bool upKeyHold;
     private bool downKeyHold;
     private bool interactButtonDown;
-    private bool boostHold;
+    
+    [SerializeField]private ParticleSystem boostParticle;
 
     private float currentSpeed;
     public float CurrentSpeed => currentSpeed;
@@ -34,7 +34,7 @@ public class ChairController : MonoBehaviour
     [SerializeField] private PickUpCollider pickUpCollider;
     public bool guardInZone => pickUpCollider.turtleGuardInZone;
     private bool guardIsPickedUp;
-    [SerializeField] private CarryingIcon carryingIcon;
+    //[SerializeField] private CarryingIcon carryingIcon;
 
     private Collider[] colliders;
     
@@ -54,8 +54,9 @@ public class ChairController : MonoBehaviour
     private float boostTimer = 0;
     private void Start()
     {
-        carryingIcon.gameObject.SetActive(false);
+        //carryingIcon.gameObject.SetActive(false);
         colliders = GetComponentsInChildren<Collider>();
+        boostParticle.Stop();
     }
 
    
@@ -67,8 +68,7 @@ public class ChairController : MonoBehaviour
       {
           var turtleGuard = GameManager.Instance.GuardController;
           var pickedUp = turtleGuard.TryGoToRestingState(chairObject);
-          if(pickedUp)
-            carryingIcon.ScaleAndDisplay(true);
+         
           guardIsPickedUp = pickedUp;
       }
 
@@ -76,16 +76,13 @@ public class ChairController : MonoBehaviour
       {
           var turtleGuard = GameManager.Instance.GuardController;
           turtleGuard.PutDownGuard(chairObject);
-          carryingIcon.ScaleAndDisplay(false);
+        
           pickUpCollider.turtleGuardInZone = false;
           guardIsPickedUp = false;
       }    
     }
 
-    void ToggleCarryingIcon(bool isActive)
-    {
-        carryingIcon.gameObject.SetActive(isActive);
-    }
+   
     void ControllerInputs()
     {
         if(!isBoosted)
@@ -99,8 +96,10 @@ public class ChairController : MonoBehaviour
                 currentSpeed = Mathf.Lerp(maxMoveSpeed, minMoveSpeed, percent);
             }
             else
+            {
                 isBoosted = false;
-
+                boostParticle.Stop();
+            }
         }
         
         chairObject.position = myRigidbody.transform.position;
@@ -108,7 +107,6 @@ public class ChairController : MonoBehaviour
         rightKeyHold = Input.GetKey(rightKey);
         upKeyHold = Input.GetKey(upKey);
         downKeyHold = Input.GetKey(downKey);
-        boostHold = Input.GetKey(boostKey);
         interactButtonDown = Input.GetKeyDown(interactButton);
     }
     private void FixedUpdate()
@@ -152,6 +150,7 @@ public class ChairController : MonoBehaviour
     public void GetBoost()
     {
         isBoosted = true;
+        boostParticle.Play();
         boostTimer = 0;
         myRigidbody.AddForce(chairObject.transform.forward * boost,ForceMode.Impulse);
         currentSpeed = maxMoveSpeed;

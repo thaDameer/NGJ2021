@@ -8,11 +8,11 @@ public class TurtleGuardController : Actor
     [SerializeField]private CharacterVariables variables;
     public GuardWalking sGuardWalking { get; protected set; }
     public GuardResting  sGuardResting { get; protected set; }
-    public KeyCode upKey, downKey, leftKey, rightKey;
-    private bool upKeyHold, downKeyHold, leftKeyHold, rightKeyHold;
+    public KeyCode upKey, downKey, leftKey, rightKey, interactKey;
+    private bool upKeyHold, downKeyHold, leftKeyHold, rightKeyHold, interactKeyDown;
 
     public Rigidbody myRigidbody;
-    
+    public ParticleSystem sleepParticle;
     public Vector3 controllerVector { get; private set; }
     public bool isMoving;
     public bool canBePickedUp;
@@ -26,7 +26,7 @@ public class TurtleGuardController : Actor
     public float drainMultiplier => variables.energyDrainMultiplier;
 
     public float currentEnergy;
-
+    public float attackCost = 5;
     #endregion
 
     private Collider[] colliders;
@@ -39,12 +39,24 @@ public class TurtleGuardController : Actor
         sGuardWalking.OnEnterState();
     }
 
+    
     public override void Update()
     {
         base.Update();
         ControllerInputs();
+        if (interactKeyDown)
+        {
+            Attack();
+        }
     }
 
+    private void Attack()
+    {
+        currentEnergy -= attackCost;
+        UIManager.Instance.UpdateAttackMeter(GetEnergyPercent());
+        animator.SetTrigger("attack");
+        
+    }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
@@ -84,6 +96,8 @@ public class TurtleGuardController : Actor
         myRigidbody.isKinematic = false;
         myRigidbody.AddForce(throwDirection * 10,ForceMode.Impulse);
         isThrown = true;
+        sleepParticle.Stop();
+        animator.SetTrigger("isThrown");
         StartCoroutine(ThrowDelay_CO());
         //var guardPos = (chairObject.transform.forward * 1.5f + chairObject.transform.position);
         //transform.position = guardPos;
@@ -98,6 +112,8 @@ public class TurtleGuardController : Actor
         yield return new WaitForSeconds(0.5f);
         sGuardWalking.OnEnterState();
     }
+
+  
     private void ControllerInputs()
     {
         float xMovement = 0;
@@ -107,6 +123,7 @@ public class TurtleGuardController : Actor
         downKeyHold = Input.GetKey(downKey);
         leftKeyHold = Input.GetKey(leftKey);
         rightKeyHold = Input.GetKey(rightKey);
+        interactKeyDown = Input.GetKeyDown(interactKey);
         isMoving = upKeyHold || (downKeyHold || (leftKeyHold || (rightKeyHold ? true : false)));
         if (leftKeyHold)
             xMovement = -1;
