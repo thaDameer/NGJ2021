@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f785b3d28efd37849902275fb2071110, type: 3}
   m_Name: TurtleGuardVaribles
   m_EditorClassIdentifier: 
-  maxMovementSpeed: 5.48
-  minMovementSpeed: 0.43
+  maxMovementSpeed: 8
+  minMovementSpeed: 2
   maxEnergy: 100
   minEnergy: 100
   rotationSpeed: 10

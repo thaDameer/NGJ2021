@@ -27,29 +27,22 @@ public class EggLogic : MonoBehaviour
 
 
     [SerializeField] private GameObject egg;
-    private void Start()
+    public void SpawnEgg()
     {
         eggState = EggState.EggInSand;
-        sandIcon.gameObject.SetActive(false);
+        
         egg.gameObject.SetActive(false);
-        StartCoroutine(EggInSand_CO());
+        sandIcon.gameObject.SetActive(true);
+        sandIcon.transform.localScale = Vector3.zero;
+        sandIcon.gameObject.SetActive(true);
+        sandIcon.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutQuint);
+        StartCoroutine(EggPopUp_CO());
     }
 
     public float GetRandomBetweenMinMax()
     {
         var randomTime = Random.Range(minSpawnTime, maxSpawnTime);
         return randomTime;
-    }
-    IEnumerator EggInSand_CO()
-    {
-        sandIcon.gameObject.SetActive(true);
-        sandIcon.transform.localScale = Vector3.zero;
-        sandIcon.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutQuint);
-        var randomTime = GetRandomBetweenMinMax();
-        yield return new WaitForSeconds(randomTime);
-        
-        StartCoroutine(EggPopUp_CO());
-
     }
 
     IEnumerator EggPopUp_CO()
