@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class ChairController : MonoBehaviour
 {
+    [SerializeField] private CharacterVariables variables;
     [SerializeField] private Rigidbody myRigidbody;
     [SerializeField] private Transform pivot;
-    [SerializeField] private float rotationSpeed = 10f;
-    [SerializeField] private float moveSpeed;
+  
     [SerializeField] private Transform chairObject;
     public KeyCode leftKey;
     public KeyCode rightKey;
@@ -22,38 +22,51 @@ public class ChairController : MonoBehaviour
     private bool downKeyHold;
     private bool boostHold;
 
-    private float speed;
+    private float currentSpeed;
     bool isAccelerating;
     public float boost = 5;
     [Range(0.1f,0.99f)]
     public float decelerateValue;
+
+    #region MovementVariables
+    
+    private float rotationSpeed =>variables.rotationSpeed;
+    private float maxMoveSpeed => variables.maxMovementSpeed;
+    private float minMoveSpeed => variables.maxMovementSpeed;
+    private float minEnergy => variables.minEnergy;
+    private float maxEnergy => variables.maxEnergy;
+    
+
+    #endregion
     private void Update()
     {
+      ControllerInputs();
+    }
+
+    void ControllerInputs()
+    {
+        if (boostHold)
+            currentSpeed = maxMoveSpeed + boost;
+        else
+            currentSpeed = maxMoveSpeed;
+        
+        chairObject.position = myRigidbody.transform.position;
         leftKeyHold = Input.GetKey(leftKey);
         rightKeyHold = Input.GetKey(rightKey);
         upKeyHold = Input.GetKey(upKey);
         downKeyHold = Input.GetKey(downKey);
         boostHold = Input.GetKey(boostKey);
-        if (boostHold)
-            speed = moveSpeed + boost;
-        else
-            speed = moveSpeed;
-        
-        var spherePos = myRigidbody.transform.position;
-        chairObject.position = myRigidbody.transform.position;
     }
-
     private void FixedUpdate()
     {
-        
         if (upKeyHold)
         {
             isAccelerating = true;
-            myRigidbody.AddForce(pivot.transform.forward * speed);
+            myRigidbody.AddForce(pivot.transform.forward * currentSpeed);
         }else if (downKeyHold)
         {
             isAccelerating = true;
-            myRigidbody.AddForce(pivot.transform.forward * -speed);
+            myRigidbody.AddForce(pivot.transform.forward * -currentSpeed);
         }
         else
             isAccelerating = false;
@@ -63,7 +76,7 @@ public class ChairController : MonoBehaviour
             var decelerate = (myRigidbody.velocity*decelerateValue);
 
             decelerate.y = myRigidbody.velocity.y;
-            myRigidbody.velocity -= decelerate;
+            myRigidbody.velocity = decelerate;
         }
         RotateChair();
     }
