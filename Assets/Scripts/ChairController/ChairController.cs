@@ -25,6 +25,7 @@ public class ChairController : MonoBehaviour
     private bool boostHold;
 
     private float currentSpeed;
+    public float CurrentSpeed => currentSpeed;
     bool isAccelerating;
     public float boost = 5;
     [Range(0.1f,0.99f)]
@@ -41,13 +42,16 @@ public class ChairController : MonoBehaviour
     
     private float rotationSpeed =>variables.rotationSpeed;
     private float maxMoveSpeed => variables.maxMovementSpeed;
-    private float minMoveSpeed => variables.maxMovementSpeed;
+    private float minMoveSpeed => variables.minMovementSpeed;
     private float minEnergy => variables.minEnergy;
     private float maxEnergy => variables.maxEnergy;
     
 
     #endregion
 
+    private bool isBoosted;
+    [SerializeField] private float boostDuration = 8f;
+    private float boostTimer = 0;
     private void Start()
     {
         carryingIcon.gameObject.SetActive(false);
@@ -84,10 +88,20 @@ public class ChairController : MonoBehaviour
     }
     void ControllerInputs()
     {
-        if (boostHold)
-            currentSpeed = maxMoveSpeed + boost;
+        if(!isBoosted)
+            currentSpeed = minMoveSpeed;
         else
-            currentSpeed = maxMoveSpeed;
+        {
+            if (boostTimer < boostDuration)
+            {
+                boostTimer += Time.deltaTime;
+                var percent = boostTimer / boostDuration;
+                currentSpeed = Mathf.Lerp(maxMoveSpeed, minMoveSpeed, percent);
+            }
+            else
+                isBoosted = false;
+
+        }
         
         chairObject.position = myRigidbody.transform.position;
         leftKeyHold = Input.GetKey(leftKey);
@@ -102,11 +116,11 @@ public class ChairController : MonoBehaviour
         if (upKeyHold)
         {
             isAccelerating = true;
-            myRigidbody.AddForce(pivot.transform.forward * currentSpeed);
+            myRigidbody.velocity = pivot.transform.forward * currentSpeed;
         }else if (downKeyHold)
         {
             isAccelerating = true;
-            myRigidbody.AddForce(pivot.transform.forward * -currentSpeed);
+            myRigidbody.velocity = pivot.transform.forward *-currentSpeed;
         }
         else
             isAccelerating = false;
@@ -121,6 +135,14 @@ public class ChairController : MonoBehaviour
         RotateChair();
     }
 
+    public void GetBoost()
+    {
+        isBoosted = true;
+        boostTimer = 0;
+        myRigidbody.AddForce(chairObject.transform.forward * boost,ForceMode.Impulse);
+        currentSpeed = maxMoveSpeed;
+
+    }
     private void RotateChair()
     {
         

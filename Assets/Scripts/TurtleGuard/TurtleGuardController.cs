@@ -122,4 +122,9 @@ public class TurtleGuardController : Actor
     {
         return currentEnergy / maxEnergy;
     }
+
+    public float GetGuardSpeed()
+    {
+        return Mathf.Lerp(minMovementSpeed, maxMovementSpeed, GetEnergyPercent());
+    }
 }

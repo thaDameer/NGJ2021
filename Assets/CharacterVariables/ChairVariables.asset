@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f785b3d28efd37849902275fb2071110, type: 3}
   m_Name: ChairVariables
   m_EditorClassIdentifier: 
-  maxMovementSpeed: 13.26
-  minMovementSpeed: 10.36
+  maxMovementSpeed: 15
+  minMovementSpeed: 4
   maxEnergy: 0
   minEnergy: 0
   rotationSpeed: 5
+  energyDrainMultiplier: 0

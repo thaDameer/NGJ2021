@@ -57,7 +57,7 @@ public class GuardWalking : State
     }
     private void Movement()
     {
-        var velocity = actor.controllerVector.normalized * actor.maxMovementSpeed;
+        var velocity = actor.controllerVector.normalized * actor.GetGuardSpeed();
         var yVelocity = actor.myRigidbody.velocity.y;
         
         actor.myRigidbody.velocity = new Vector3(velocity.x, yVelocity,velocity.z);
