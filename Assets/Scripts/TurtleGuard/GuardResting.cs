@@ -28,5 +28,8 @@ public class GuardResting : State
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        actor.GainingEnergy();
     }
+
+ 
 }

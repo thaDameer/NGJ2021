@@ -99,6 +99,25 @@ public class TurtleGuardController : Actor
         controllerVector = new Vector3(xMovement, 0, zMovement);
     }
 
+    public void DrainingEnergy()
+    {
+       currentEnergy -= drainMultiplier * Time.fixedDeltaTime;
+       ClampCurrentEnergy();
+       var percent = GetEnergyPercent();
+       UIManager.Instance.UpdateGuardDrainingMeter(percent, transform);
+    }
+
+    public void GainingEnergy()
+    {
+        currentEnergy += (drainMultiplier * 1.5f) * Time.fixedDeltaTime;
+        ClampCurrentEnergy();
+        var percent = GetEnergyPercent();
+        UIManager.Instance.UpdateRestingMeter(percent,transform);
+    }
+    void ClampCurrentEnergy()
+    {
+        currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
+    }
     public float GetEnergyPercent()
     {
         return currentEnergy / maxEnergy;

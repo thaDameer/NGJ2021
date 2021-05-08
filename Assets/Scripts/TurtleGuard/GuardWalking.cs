@@ -19,7 +19,7 @@ public class GuardWalking : State
         base.FixedUpdate();
         Movement();
         RotateTowardsDirection();
-        DrainingEnergy();
+        actor.DrainingEnergy();
     }
 
     public override void OnEnterState()
@@ -62,12 +62,7 @@ public class GuardWalking : State
         
         actor.myRigidbody.velocity = new Vector3(velocity.x, yVelocity,velocity.z);
     }
-    public void DrainingEnergy()
-    {
-        actor.currentEnergy -= actor.drainMultiplier * Time.deltaTime;
-        var percent = actor.GetEnergyPercent();
-        UIManager.Instance.UpdateGuardEnergyMeter(percent, actor.transform);
-    }
+  
     
       
 }

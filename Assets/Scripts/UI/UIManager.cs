@@ -20,8 +20,13 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateGuardEnergyMeter(float percent, Transform characterTransform)
+    public void UpdateGuardDrainingMeter(float percent, Transform characterTransform)
     {
-        guardEnergyMeter.UpdateEnergyGraphics(percent,characterTransform);
+        guardEnergyMeter.UpdateEnergyDrain(percent,characterTransform);
+    }
+
+    public void UpdateRestingMeter(float percent, Transform characterTransform)
+    {
+        guardEnergyMeter.UpdateRestingMeter(percent,characterTransform);
     }
 }

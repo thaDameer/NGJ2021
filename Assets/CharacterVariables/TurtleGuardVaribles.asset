@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TurtleGuardVaribles
   m_EditorClassIdentifier: 
   maxMovementSpeed: 5.48
-  minMovementSpeed: 0
+  minMovementSpeed: 0.43
   maxEnergy: 100
   minEnergy: 100
   rotationSpeed: 10
