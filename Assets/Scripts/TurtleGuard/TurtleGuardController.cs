@@ -10,18 +10,19 @@ public class TurtleGuardController : Actor
     public GuardResting  sGuardResting { get; protected set; }
     public KeyCode upKey, downKey, leftKey, rightKey;
     private bool upKeyHold, downKeyHold, leftKeyHold, rightKeyHold;
-   
-    [SerializeField] private Rigidbody myRigidbody;
-    private Vector3 controllerVector;
-    public bool isMoving;
 
+    public Rigidbody myRigidbody;
+    
+    public Vector3 controllerVector { get; private set; }
+    public bool isMoving;
+    public bool canBePickedUp;
     #region MovementVariables
 
-    private float maxMovementSpeed => variables.maxMovementSpeed;
-    private float minMovementSpeed => variables.minMovementSpeed;
-    private float rotationSpeed => variables.rotationSpeed;
-    private float minEnergy => variables.minEnergy;
-    private float maxEnergy => variables.maxEnergy;
+    public float maxMovementSpeed => variables.maxMovementSpeed;
+    public float minMovementSpeed => variables.minMovementSpeed;
+    public float rotationSpeed => variables.rotationSpeed;
+    public float minEnergy => variables.minEnergy;
+    public float maxEnergy => variables.maxEnergy;
     
 
     #endregion
@@ -29,7 +30,7 @@ public class TurtleGuardController : Actor
     {
         sGuardResting = new GuardResting(this);
         sGuardWalking = new GuardWalking(this);
-        sGuardResting.OnEnterState();
+        sGuardWalking.OnEnterState();
     }
 
     public override void Update()
@@ -41,12 +42,27 @@ public class TurtleGuardController : Actor
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        Movement();
+        
+       
     }
 
-    private void Movement()
+    public bool TryGoToRestingState(Transform chairParent)
     {
-        myRigidbody.velocity = controllerVector.normalized * maxMovementSpeed;
+        if(!canBePickedUp) return false;
+        transform.parent = chairParent;
+        Vector3 sittingPos = Vector3.zero;
+        sittingPos.y += 0.9f;
+        transform.localPosition = sittingPos;
+        sGuardResting.OnEnterState();
+        return true;
+    }
+
+    public void PutDownGuard(Transform chairObject)
+    {
+        transform.parent = null;
+        var guardPos = (chairObject.transform.forward * 1.5f + chairObject.transform.position);
+        transform.position = guardPos;
+        sGuardWalking.OnEnterState();
     }
     private void ControllerInputs()
     {
