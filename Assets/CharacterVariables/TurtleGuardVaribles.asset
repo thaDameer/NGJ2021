@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMovementSpeed: 5.48
   minMovementSpeed: 0
-  maxEnergy: 0
-  minEnergy: 0
-  rotationSpeed: 3.34
+  maxEnergy: 100
+  minEnergy: 100
+  rotationSpeed: 10
+  energyDrainMultiplier: 3

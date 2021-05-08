@@ -6,7 +6,7 @@ namespace States
 {
     public class State 
     {
-        protected Actor actor;
+        private Actor actor;
     
         protected State(Actor actor)
         {

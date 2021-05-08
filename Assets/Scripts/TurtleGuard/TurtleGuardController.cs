@@ -23,11 +23,17 @@ public class TurtleGuardController : Actor
     public float rotationSpeed => variables.rotationSpeed;
     public float minEnergy => variables.minEnergy;
     public float maxEnergy => variables.maxEnergy;
-    
+    public float drainMultiplier => variables.energyDrainMultiplier;
+
+    public float currentEnergy;
 
     #endregion
+
+    private Collider[] colliders;
     private void Awake()
     {
+        currentEnergy = maxEnergy;
+        colliders = GetComponentsInChildren<Collider>();
         sGuardResting = new GuardResting(this);
         sGuardWalking = new GuardWalking(this);
         sGuardWalking.OnEnterState();
@@ -51,12 +57,19 @@ public class TurtleGuardController : Actor
         if(!canBePickedUp) return false;
         transform.parent = chairParent;
         Vector3 sittingPos = Vector3.zero;
-        sittingPos.y += 0.9f;
+        sittingPos.y += 0.4f;
         transform.localPosition = sittingPos;
+        transform.rotation = chairParent.transform.rotation;
         sGuardResting.OnEnterState();
         return true;
     }
-
+    public void ToggleGuardColliders(bool isActive)
+    {
+        foreach (var collider in colliders)
+        {
+            collider.enabled = isActive;
+        }
+    }
     public void PutDownGuard(Transform chairObject)
     {
         transform.parent = null;
@@ -84,5 +97,10 @@ public class TurtleGuardController : Actor
             zMovement = -1;
 
         controllerVector = new Vector3(xMovement, 0, zMovement);
+    }
+
+    public float GetEnergyPercent()
+    {
+        return currentEnergy / maxEnergy;
     }
 }

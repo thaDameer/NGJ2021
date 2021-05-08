@@ -16,4 +16,4 @@ MonoBehaviour:
   minMovementSpeed: 10.36
   maxEnergy: 0
   minEnergy: 0
-  rotationSpeed: 2.48
+  rotationSpeed: 5
