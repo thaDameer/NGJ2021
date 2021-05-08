@@ -6,7 +6,7 @@ using UnityEngine;
 public class GuardWalking : State
 {
     private TurtleGuardController actor;
-    private float duration = 3.5f;
+    private float duration = 2f;
     private float timer = 0;
     private bool timerComplete = false;
     public GuardWalking(TurtleGuardController actor) : base(actor)
@@ -18,6 +18,8 @@ public class GuardWalking : State
     {
         base.FixedUpdate();
         Movement();
+        RotateTowardsDirection();
+        DrainingEnergy();
     }
 
     public override void OnEnterState()
@@ -35,7 +37,7 @@ public class GuardWalking : State
     public override void Update()
     {
         base.Update();
-
+        
         timerComplete = timer > duration;
         if(timerComplete) return;
         timer += Time.deltaTime;
@@ -43,6 +45,16 @@ public class GuardWalking : State
             actor.canBePickedUp = true;
     }
 
+    private float timeCount = 0;
+    private void RotateTowardsDirection()
+    {
+        if(actor.controllerVector == Vector3.zero) return;
+        
+        var lookRotation = Quaternion.LookRotation(actor.controllerVector.normalized);
+        timeCount = timeCount + Time.deltaTime;
+        var slerpedRot = Quaternion.Slerp(actor.transform.rotation, lookRotation, Time.deltaTime * actor.rotationSpeed);
+        actor.transform.rotation = slerpedRot;
+    }
     private void Movement()
     {
         var velocity = actor.controllerVector.normalized * actor.maxMovementSpeed;
@@ -50,5 +62,12 @@ public class GuardWalking : State
         
         actor.myRigidbody.velocity = new Vector3(velocity.x, yVelocity,velocity.z);
     }
+    public void DrainingEnergy()
+    {
+        actor.currentEnergy -= actor.drainMultiplier * Time.deltaTime;
+        var percent = actor.GetEnergyPercent();
+        UIManager.Instance.UpdateGuardEnergyMeter(percent, actor.transform);
+    }
+    
       
 }

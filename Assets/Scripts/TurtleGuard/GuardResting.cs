@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GuardResting : State
 {
-    private TurtleGuardController actor;
+    public TurtleGuardController actor;
     public GuardResting(TurtleGuardController actor) : base(actor)
     {
         this.actor = actor;
@@ -14,12 +14,14 @@ public class GuardResting : State
     public override void OnEnterState()
     {
         base.OnEnterState();
+        actor.ToggleGuardColliders(false);
         actor.myRigidbody.isKinematic = true;
     }
 
     public override void OnExitState()
     {
         base.OnExitState();
+        actor.ToggleGuardColliders(true);
         actor.myRigidbody.isKinematic = false;
     }
 

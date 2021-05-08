@@ -10,4 +10,6 @@ public class CharacterVariables : ScriptableObject
    public float maxEnergy;
    public float minEnergy;
    public float rotationSpeed;
+
+   public float energyDrainMultiplier;
 }

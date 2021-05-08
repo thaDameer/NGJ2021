@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using States;
 
+
 public class Actor : MonoBehaviour
 {
     public State previousState;

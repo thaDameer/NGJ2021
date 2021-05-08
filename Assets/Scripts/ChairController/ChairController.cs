@@ -33,9 +33,9 @@ public class ChairController : MonoBehaviour
     [SerializeField] private PickUpCollider pickUpCollider;
     public bool guardInZone => pickUpCollider.turtleGuardInZone;
     private bool guardIsPickedUp;
-    [SerializeField] private GameObject carryingIcon;
-    
-    
+    [SerializeField] private CarryingIcon carryingIcon;
+
+    private Collider[] colliders;
     
     #region MovementVariables
     
@@ -51,8 +51,10 @@ public class ChairController : MonoBehaviour
     private void Start()
     {
         carryingIcon.gameObject.SetActive(false);
+        colliders = GetComponentsInChildren<Collider>();
     }
 
+   
     private void Update()
     {
       ControllerInputs();
@@ -60,10 +62,9 @@ public class ChairController : MonoBehaviour
       if (!guardIsPickedUp && guardInZone)
       {
           var turtleGuard = GameManager.Instance.GuardController;
-          
           var pickedUp = turtleGuard.TryGoToRestingState(chairObject);
-          //debug
-          ToggleCarryingIcon(pickedUp);
+          if(pickedUp)
+            carryingIcon.ScaleAndDisplay(true);
           guardIsPickedUp = pickedUp;
       }
 
@@ -71,7 +72,7 @@ public class ChairController : MonoBehaviour
       {
           var turtleGuard = GameManager.Instance.GuardController;
           turtleGuard.PutDownGuard(chairObject);
-          ToggleCarryingIcon(false);
+          carryingIcon.ScaleAndDisplay(false);
           pickUpCollider.turtleGuardInZone = false;
           guardIsPickedUp = false;
       }    
@@ -125,17 +126,11 @@ public class ChairController : MonoBehaviour
         
         if (rightKeyHold)
         {
-            var testVelocity = pivot.transform.forward * myRigidbody.velocity.magnitude;
-            // myRigidbody.velocity = testVelocity;
-            // var rotation = Quaternion.Euler(pivot.up * rotationSpeed);
-            // rotation.x = 0;
-            // rotation.z = 0;
-            // pivot.transform.rotation = Quaternion.Slerp(pivot.transform.rotation,rotation,1 * Time.fixedTime);
             pivot.transform.Rotate(pivot.up * rotationSpeed);
         }else if (leftKeyHold)
         {
-            var testVelocity = pivot.transform.forward * myRigidbody.velocity.magnitude;
-            myRigidbody.velocity = testVelocity;
+         
+            
             pivot.transform.Rotate(pivot.up*-rotationSpeed);
         }
     }
