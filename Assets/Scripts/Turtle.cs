@@ -10,6 +10,7 @@ public class Turtle : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     private bool isWalking;
     private Vector3 endPosition;
+    public int turtleHealth { get; private set; }
     bool TryGetWaterPosition(out Vector3 waterPos)
     {
         RaycastHit hit;
@@ -29,6 +30,7 @@ public class Turtle : MonoBehaviour
 
     public void SpawnTurtle()
     {
+        turtleHealth = 3;
         //DO animation?
         EggSpawner.Instance.AddHatchedTurtle(this);
         UIManager.Instance.UpdateHatchedCounter();
@@ -46,5 +48,15 @@ public class Turtle : MonoBehaviour
             agent.SetDestination(endPosition);
         }
     }
-    
+
+    public void DealDamage()
+    {
+        turtleHealth -= 1;
+        if (turtleHealth <= 0)
+        {
+            EggSpawner.Instance.RemovedBornTurtle(this);
+            Destroy(this);
+        }
+        
+    }
 }

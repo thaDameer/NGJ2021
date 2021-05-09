@@ -21,6 +21,7 @@ public class EggLogic : MonoBehaviour
     [SerializeField] private float minSpawnTime, maxSpawnTime;
     [SerializeField] private Animator eggAnimator;
     [SerializeField] private Turtle turtlePrefab;
+    [SerializeField] private Collider Collider;
 
     public int eggHealth = 3;
     [SerializeField] private GameObject sandIcon;
@@ -52,10 +53,11 @@ public class EggLogic : MonoBehaviour
         eggAnimator.SetTrigger("PopUp");
         var randomTime = GetRandomBetweenMinMax();
         yield return new WaitForSeconds(randomTime);
+        
         EggHatch();
     }
 
-    public void GetDamage()
+    public void DealDamage()
     {
         eggHealth -= 1;
     }
@@ -67,6 +69,8 @@ public class EggLogic : MonoBehaviour
         var turtleClone = Instantiate(turtlePrefab,transform);
         turtleClone.transform.position = transform.position;
         turtleClone.SpawnTurtle();
+        Collider.enabled = false;
+        EggSpawner.Instance.RemovedSpawnedEgg(this);
         Destroy(this);
         //spawn turtle
     }
