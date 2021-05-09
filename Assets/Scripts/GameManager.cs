@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public ChairController ChairController => chairController;
     public int savedTurtles;
     public bool gameIsRunning = true;
+    
+    
     public int GetAmountOfBornTurtles()
     {
         if (EggSpawner.Instance.BornTurtles.Count > 0)
