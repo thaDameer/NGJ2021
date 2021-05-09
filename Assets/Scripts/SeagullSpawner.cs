@@ -20,13 +20,16 @@ public class SeagullSpawner : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer < randomTime)
+        if(timer > randomTime)
         {
             var randomSpawner = Random.Range(0, spawnTransforms.Count - 1);
             var spawnPos = spawnTransforms[randomSpawner].transform.position;
             var clone = Instantiate(seagullPrefab);
             clone.transform.position = spawnPos;
+            clone.LookForEggsTurtle();
+            randomTime = Random.Range(minSpawnTime, maxSpawnTime);
             timer = 0;
+            
             //clone.
         }
     }
