@@ -22,8 +22,9 @@ public class Seagull : MonoBehaviour
         {
             distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
             direction = (target.transform.position-transform.position).normalized;
+            direction.x = 0;
             myRigidbody.velocity = direction * moveSpeed;
-            var lookRot = Quaternion.LookRotation(target.position);
+            var lookRot = Quaternion.LookRotation(direction.normalized);
             lookRot.x = 0;
             lookRot.z = 0;
             transform.rotation = lookRot;
@@ -88,7 +89,8 @@ public class Seagull : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         LookForEggsTurtle();
     }
-    public void GetClosestTurtleOrEgg()
+
+    private void OnTriggerEnter(Collider other)
     {
         
     }
