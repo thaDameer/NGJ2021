@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pinkegg
+  m_Name: Assetpack2
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 6b984670c3d09a34f9b052e6f08e2622, type: 3}
+        m_Texture: {fileID: 2800000, guid: 316095ea106edb04cb60b5c7fd14ac40, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,19 +40,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8499b239dd5df21469732c1522e0321a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8fee8d910a638a24385a835cad27205c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: bf63a7d64a5232249adb9cd3ca137683, type: 3}
+        m_Texture: {fileID: 2800000, guid: 548bddb1ff989fb4db66918ab5b46fcf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 1628659beb9b82c4e8e79fbfbb47c0f9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5e0cfc6f7058239458e6d08601ccb0e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: d2f55b7ccb121a54a966e0bbd3b12222, type: 3}
+        m_Texture: {fileID: 2800000, guid: 241c8b126aed45b42b81bee149e3c8c5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
