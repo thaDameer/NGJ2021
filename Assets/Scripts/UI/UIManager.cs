@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Canvas endScreen;
 
     [SerializeField]private  TMP_Text winText;
+    [SerializeField] private TMP_Text drainedEnergy;
     [SerializeField] private EnergyMeter guardEnergyMeter;
     [SerializeField] private Canvas gameplayCanvas;
     [SerializeField] private TMP_Text bornTurtleCounter;
@@ -55,10 +56,14 @@ public class UIManager : MonoBehaviour
     public void ActivateDeathScreen()
     {
         winText.text = "GAME OVER";
+        drainedEnergy.text = "you fell asleep!";
+        drainedEnergy.gameObject.SetActive(true);
+        
         endScreen.gameObject.SetActive(true);
     }
     public void ActivateWinScreen()
     {
+        drainedEnergy.gameObject.SetActive(false);
         winText.text = "You saved "+GameManager.Instance.savedTurtles+"!!";
         endScreen.gameObject.SetActive(true);
     }

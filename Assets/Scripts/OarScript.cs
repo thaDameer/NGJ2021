@@ -17,7 +17,7 @@ public class OarScript : MonoBehaviour
     }
 
     private float timer = 0;
-    private float duration = 0.4f;
+    private float duration = 0.3f;
     IEnumerator AttackRoutine()
     {
         while (timer < duration)

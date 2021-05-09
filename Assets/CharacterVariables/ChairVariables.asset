@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChairVariables
   m_EditorClassIdentifier: 
   maxMovementSpeed: 15
-  minMovementSpeed: 4
+  minMovementSpeed: 6
   maxEnergy: 0
   minEnergy: 0
   rotationSpeed: 5
