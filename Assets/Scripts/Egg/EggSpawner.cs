@@ -45,5 +45,37 @@ public class EggSpawner : MonoBehaviour
             spawnTime = Random.Range(minTime, maxTime);
         }
     }
+
+    public Transform GetRandomEggOrTurtleTransform()
+    {
+        if (eggs.Count > 0 && bornTurtles.Count > 0)
+        {
+            var random = Random.Range(0, 1);
+            if (random == 0)
+            {
+                return GetRandomEggTransform();
+            }else if (random == 1)
+            {
+                return GetRandomTurtleTransform();
+            }
+        }else if (eggs.Count > 0 && bornTurtles.Count <= 0)
+            return GetRandomEggTransform();
+        else if (bornTurtles.Count > 0 && eggs.Count <= 0)
+            return GetRandomTurtleTransform();
+        
+        
+        return null;
+        
+    }
+
+    private Transform GetRandomEggTransform()
+    {
+        return eggs[Random.Range(0, eggs.Count - 1)].transform;
+    }
+
+    private Transform GetRandomTurtleTransform()
+    {
+        return bornTurtles[Random.Range(0, bornTurtles.Count - 1)].transform;
+    }
     
 }

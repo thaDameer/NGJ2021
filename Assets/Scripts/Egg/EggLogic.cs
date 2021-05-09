@@ -52,7 +52,7 @@ public class EggLogic : MonoBehaviour
         eggAnimator.SetTrigger("PopUp");
         var randomTime = GetRandomBetweenMinMax();
         yield return new WaitForSeconds(randomTime);
-        StartCoroutine(EggHatch_CO());
+        EggHatch();
     }
 
     public void GetDamage()
@@ -60,11 +60,10 @@ public class EggLogic : MonoBehaviour
         eggHealth -= 1;
     }
 
-    IEnumerator EggHatch_CO()
+    void EggHatch()
     {
         eggState = EggState.EggHatching;
         eggAnimator.SetTrigger("EggHatch");
-        yield return new WaitForSeconds(0.5f);
         var turtleClone = Instantiate(turtlePrefab,transform);
         turtleClone.transform.position = transform.position;
         turtleClone.SpawnTurtle();
