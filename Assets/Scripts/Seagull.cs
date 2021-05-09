@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class Seagull : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem deathParticle;
+    public SeagullEnemyDetector enemyDetector;
+    private bool CanAttack => enemyDetector.canAttack;
     [SerializeField] private Rigidbody myRigidbody;
     [SerializeField] private Animator animator;
     private bool hasTarget;
@@ -21,11 +24,13 @@ public class Seagull : MonoBehaviour
     private Coroutine attackRoutine;
     private void FixedUpdate()
     {
+        Debug.Log("can enemy attack: "+CanAttack);
+        
         if (target && !targetInRange)
         {
             distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
             direction = (target.transform.position-transform.position).normalized;
-            direction.x = 0;
+            direction.y = 0;
             myRigidbody.velocity = direction * moveSpeed;
             var lookRot = Quaternion.LookRotation(direction.normalized);
             lookRot.x = 0;
@@ -37,14 +42,25 @@ public class Seagull : MonoBehaviour
             {
                 targetInRange = true;
                 animator.SetBool("isAttacking",targetInRange);
-                attackRoutine = StartCoroutine(AttackRoutine_CO());
+                if(CanAttack)
+                    attackRoutine = StartCoroutine(AttackRoutine_CO());
             }
         }
     }
 
+    public void AttackEgg(EggLogic eggLogic)
+    {
+        animator.SetTrigger("attack");
+        eggLogic.DealDamage();
+    }
+
+    public void AttackTurtle(Turtle turtle)
+    {
+        animator.SetTrigger("attack");
+        turtle.DealDamage();
+    }
     IEnumerator AttackRoutine_CO()
     {
-       
         EggLogic egg = target.GetComponentInParent<EggLogic>();
         if (egg)
         {
@@ -94,13 +110,16 @@ public class Seagull : MonoBehaviour
     }
 
     public void DamageSeagull(Vector3 impact)
-    {
+    {   
+        Destroy(this);
         if(attackRoutine!=null)
             StopCoroutine(attackRoutine);
-        direction = (impact - transform.position).normalized;
+        Destroy(enemyDetector);
+        deathParticle.Play();
+        direction = (transform.position-impact).normalized;
         myRigidbody.AddForce(direction*8,ForceMode.Impulse);
         target = null;
-        Destroy(this,2f);
+        Destroy(this.gameObject,1f);
     }
 
     private void OnTriggerEnter(Collider other)

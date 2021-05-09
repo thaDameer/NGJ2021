@@ -30,7 +30,7 @@ public class Turtle : MonoBehaviour
 
     public void SpawnTurtle()
     {
-        turtleHealth = 3;
+        turtleHealth = 1;
         //DO animation?
         EggSpawner.Instance.AddHatchedTurtle(this);
         UIManager.Instance.UpdateHatchedCounter();

@@ -23,7 +23,7 @@ public class EggLogic : MonoBehaviour
     [SerializeField] private Turtle turtlePrefab;
     [SerializeField] private Collider Collider;
 
-    public int eggHealth = 3;
+    public int eggHealth = 1;
    
     public void SpawnEgg()
     {
@@ -50,6 +50,11 @@ public class EggLogic : MonoBehaviour
     public void DealDamage()
     {
         eggHealth -= 1;
+        if (eggHealth <= 0)
+        {
+            EggSpawner.Instance.RemovedSpawnedEgg(this);
+            Destroy(this.gameObject);
+        }
     }
 
     void EggHatch()
