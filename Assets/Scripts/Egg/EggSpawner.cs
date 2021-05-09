@@ -45,4 +45,5 @@ public class EggSpawner : MonoBehaviour
             spawnTime = Random.Range(minTime, maxTime);
         }
     }
+    
 }
