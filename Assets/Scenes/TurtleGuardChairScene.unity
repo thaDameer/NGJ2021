@@ -4696,27 +4696,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d7ce76ca0781d24da0d1fa3636d6c70, type: 3}
---- !u!1 &731557849 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6923674360056534896, guid: 1d7ce76ca0781d24da0d1fa3636d6c70, type: 3}
-  m_PrefabInstance: {fileID: 731557848}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &731557850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731557849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aa408e6fdf49e14bb204217f77565c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnTransforms: []
-  seagullPrefab: {fileID: 0}
-  minSpawnTime: 0
-  maxSpawnTime: 0
 --- !u!1001 &737242586
 PrefabInstance:
   m_ObjectHideFlags: 0

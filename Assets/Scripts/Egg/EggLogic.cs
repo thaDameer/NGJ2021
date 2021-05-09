@@ -24,19 +24,10 @@ public class EggLogic : MonoBehaviour
     [SerializeField] private Collider Collider;
 
     public int eggHealth = 3;
-    [SerializeField] private GameObject sandIcon;
-
-
-    [SerializeField] private GameObject egg;
+   
     public void SpawnEgg()
     {
         eggState = EggState.EggInSand;
-        
-        egg.gameObject.SetActive(false);
-        sandIcon.gameObject.SetActive(true);
-        sandIcon.transform.localScale = Vector3.zero;
-        sandIcon.gameObject.SetActive(true);
-        sandIcon.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutQuint);
         StartCoroutine(EggPopUp_CO());
     }
 
@@ -49,7 +40,6 @@ public class EggLogic : MonoBehaviour
     IEnumerator EggPopUp_CO()
     {
         eggState = EggState.EggPopup;
-        egg.gameObject.SetActive(true);
         eggAnimator.SetTrigger("PopUp");
         var randomTime = GetRandomBetweenMinMax();
         yield return new WaitForSeconds(randomTime);

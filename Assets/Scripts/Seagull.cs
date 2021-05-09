@@ -26,7 +26,7 @@ public class Seagull : MonoBehaviour
             var lookRot = Quaternion.LookRotation(target.position);
             lookRot.x = 0;
             lookRot.z = 0;
-            transform.rotation = Quaternion.Slerp(transform.rotation,lookRot,0.2f*Time.fixedDeltaTime);
+            transform.rotation = lookRot;
             bool isAttacking = targetRadius > distanceToTarget;
             animator.SetBool("isAttacking",isAttacking);
             if (targetRadius > distanceToTarget)
