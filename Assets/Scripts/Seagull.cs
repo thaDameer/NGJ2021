@@ -112,6 +112,7 @@ public class Seagull : MonoBehaviour
     public void DamageSeagull(Vector3 impact)
     {   
         Destroy(this);
+        transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutQuint);
         if(attackRoutine!=null)
             StopCoroutine(attackRoutine);
         Destroy(enemyDetector);
