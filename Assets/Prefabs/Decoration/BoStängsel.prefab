@@ -11,6 +11,14 @@ GameObject:
   - component: {fileID: 4484666321637689151}
   - component: {fileID: 6426556064231401686}
   - component: {fileID: 467483575177421003}
+  - component: {fileID: 5324465944225786722}
+  - component: {fileID: 9070318460943542095}
+  - component: {fileID: 240501764387381543}
+  - component: {fileID: 7404674670811475113}
+  - component: {fileID: 1662419333163921743}
+  - component: {fileID: 3443216362562980861}
+  - component: {fileID: 7545861454592044306}
+  - component: {fileID: 935686838723929785}
   m_Layer: 0
   m_Name: "BoSt\xE4ngsel"
   m_TagString: Untagged
@@ -81,3 +89,107 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5324465944225786722
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298755193721816803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0032943487, y: 0.003372715, z: 0.021075353}
+  m_Center: {x: 0.01631828, y: 0.015731283, z: 0.010646661}
+--- !u!65 &9070318460943542095
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298755193721816803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0032943487, y: 0.003372715, z: 0.021075353}
+  m_Center: {x: -0.016, y: 0.015731283, z: 0.010646661}
+--- !u!65 &240501764387381543
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298755193721816803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0032943487, y: 0.003372715, z: 0.021075353}
+  m_Center: {x: -0.016, y: -0.016, z: 0.010646661}
+--- !u!65 &7404674670811475113
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298755193721816803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0032943487, y: 0.003372715, z: 0.019525364}
+  m_Center: {x: 0.016, y: -0.016, z: 0.009871666}
+--- !u!65 &1662419333163921743
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298755193721816803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03595297, y: 0.002687016, z: 0.0021607568}
+  m_Center: {x: -0.000010988712, y: -0.016244976, z: 0.018536985}
+--- !u!65 &3443216362562980861
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298755193721816803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03595297, y: 0.002687016, z: 0.0021607568}
+  m_Center: {x: -0.000010988712, y: 0.016, z: 0.018536985}
+--- !u!65 &7545861454592044306
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298755193721816803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0023304294, y: 0.034900293, z: 0.0025842313}
+  m_Center: {x: -0.016492642, y: -0.00013831019, z: 0.018899923}
+--- !u!65 &935686838723929785
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298755193721816803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0023304294, y: 0.034900293, z: 0.0025842313}
+  m_Center: {x: 0.016, y: -0.00013831019, z: 0.018899923}
