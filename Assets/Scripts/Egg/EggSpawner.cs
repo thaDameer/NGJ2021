@@ -10,6 +10,7 @@ public class EggSpawner : MonoBehaviour
 {
     public static EggSpawner Instance;
     [SerializeField]private List<EggLogic> eggs = new List<EggLogic>();
+    [SerializeField] private List<EggLogic> spawnedEggs = new List<EggLogic>();
     [SerializeField] private List<Turtle> bornTurtles;
     public List<Turtle> BornTurtles => bornTurtles;
     public int minTime, maxTime;
@@ -24,7 +25,6 @@ public class EggSpawner : MonoBehaviour
         
         eggs = GetComponentsInChildren<EggLogic>().ToList();
         spawnTime = currentTime + (Random.Range(minTime, maxTime));
-        Debug.Log(eggs.Capacity);
     }
 
     public void AddHatchedTurtle(Turtle turtle)
@@ -40,6 +40,7 @@ public class EggSpawner : MonoBehaviour
         {
             var randomEggIndex = Random.Range(0, eggs.Count-1);
             eggs[randomEggIndex].SpawnEgg();
+            spawnedEggs.Add(eggs[randomEggIndex]);
             eggs.RemoveAt(randomEggIndex);
             currentTime = 0;
             spawnTime = Random.Range(minTime, maxTime);
@@ -48,7 +49,7 @@ public class EggSpawner : MonoBehaviour
 
     public Transform GetRandomEggOrTurtleTransform()
     {
-        if (eggs.Count > 0 && bornTurtles.Count > 0)
+        if (spawnedEggs.Count > 0 && bornTurtles.Count > 0)
         {
             var random = Random.Range(0, 1);
             if (random == 0)
@@ -58,9 +59,9 @@ public class EggSpawner : MonoBehaviour
             {
                 return GetRandomTurtleTransform();
             }
-        }else if (eggs.Count > 0 && bornTurtles.Count <= 0)
+        }else if (spawnedEggs.Count > 0 && bornTurtles.Count <= 0)
             return GetRandomEggTransform();
-        else if (bornTurtles.Count > 0 && eggs.Count <= 0)
+        else if (bornTurtles.Count > 0 && spawnedEggs.Count <= 0)
             return GetRandomTurtleTransform();
         
         
@@ -70,12 +71,37 @@ public class EggSpawner : MonoBehaviour
 
     private Transform GetRandomEggTransform()
     {
-        return eggs[Random.Range(0, eggs.Count - 1)].transform;
+        var randomVal = Random.Range(0, spawnedEggs.Count - 1);
+        return spawnedEggs[randomVal].transform;
     }
 
     private Transform GetRandomTurtleTransform()
     {
         return bornTurtles[Random.Range(0, bornTurtles.Count - 1)].transform;
+    }
+
+    public void RemovedBornTurtle(Turtle turtle)
+    {
+        if(bornTurtles.Count <=0) return;
+        for (int i = 0; i < bornTurtles.Count; i++)
+        {
+            if (spawnedEggs[i] == turtle)
+            {
+                bornTurtles.RemoveAt(i);
+            }
+        }
+    }
+    public void RemovedSpawnedEgg(EggLogic egg)
+    {
+        if(spawnedEggs.Count<=0) return;
+
+        for (int i = 0; i < spawnedEggs.Count; i++)
+        {
+            if (spawnedEggs[i] == egg)
+            {
+                spawnedEggs.RemoveAt(i);
+            }
+        }
     }
     
 }

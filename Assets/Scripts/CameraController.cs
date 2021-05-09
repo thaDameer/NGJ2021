@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
     {
         Vector3 middleCalculation = (guardTransform.position + chairTransform.position) / 2;
         middleCalculation.z += zOffset;
+        //middleCalculation.z = Mathf.Clamp(middleCalculation.z, minZClam, maxZClamp);
         middleCalculation.x = Mathf.Clamp(middleCalculation.x, minXClamp, maxXClamp);
         transform.position = middleCalculation;
     }

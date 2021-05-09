@@ -8,7 +8,10 @@ public class TurtleGoal : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var turtle = GetComponentInParent<Turtle>();
-        if(turtle)
+        if (turtle)
+        {
+            EggSpawner.Instance.RemovedBornTurtle(turtle);
             GameManager.Instance.SavedTurtle();
+        }
     }
 }

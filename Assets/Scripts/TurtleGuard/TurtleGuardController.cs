@@ -69,7 +69,7 @@ public class TurtleGuardController : Actor
         if(!canBePickedUp) return false;
         transform.parent = chairParent;
         Vector3 sittingPos = Vector3.zero;
-        sittingPos.y += 0.4f;
+        sittingPos.y += 0.2f;
         transform.localPosition = sittingPos;
         transform.rotation = chairParent.transform.rotation;
         sGuardResting.OnEnterState();

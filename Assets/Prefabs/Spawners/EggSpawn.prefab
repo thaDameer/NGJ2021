@@ -52,6 +52,7 @@ MonoBehaviour:
   maxSpawnTime: 5
   eggAnimator: {fileID: 8971405386040251774}
   turtlePrefab: {fileID: 2885777534189762660, guid: 5bd2cb1e13b96a6439450409d7d64148, type: 3}
+  Collider: {fileID: 8971405386711398930}
   eggHealth: 3
   sandIcon: {fileID: 8971405386936139401}
   egg: {fileID: 8971405386711398931}
