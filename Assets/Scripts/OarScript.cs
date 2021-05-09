@@ -5,12 +5,37 @@ using UnityEngine;
 
 public class OarScript : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] private Transform castPos;
+
+    private Coroutine attackRoutine;
+    public void OverlapAttack()
     {
-        var seagull = other.GetComponent<Seagull>();
-        if (seagull)
+        timer = 0;
+        if(attackRoutine!=null)
+            StopCoroutine(attackRoutine);
+        attackRoutine = StartCoroutine(AttackRoutine());
+    }
+
+    private float timer = 0;
+    private float duration = 0.4f;
+    IEnumerator AttackRoutine()
+    {
+        while (timer < duration)
         {
-            Debug.Log("hit bird");
+            timer += Time.deltaTime;
+            Collider[] hits = Physics.OverlapSphere(castPos.transform.position, 1.5f);
+            foreach (var collider in hits)
+            {
+               
+                Seagull seagull = collider.GetComponentInParent<Seagull>();
+                if (seagull)
+                {
+                    seagull.DamageSeagull(castPos.transform.position);
+                    Debug.Log("booo");
+                }
+                yield return new WaitForEndOfFrame();
+            }
         }
+        
     }
 }
