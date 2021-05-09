@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TurtleGuardController : Actor
 {
+    [SerializeField]private OarScript _oarScript;
     [SerializeField]private CharacterVariables variables;
     public GuardWalking sGuardWalking { get; protected set; }
     public GuardResting  sGuardResting { get; protected set; }
@@ -54,6 +55,7 @@ public class TurtleGuardController : Actor
     {
         currentEnergy -= attackCost;
         UIManager.Instance.UpdateAttackMeter(GetEnergyPercent());
+        _oarScript.OverlapAttack();
         animator.SetTrigger("attack");
         
     }

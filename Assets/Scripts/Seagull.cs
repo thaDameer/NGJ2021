@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using States;
 using UnityEngine;
 
 
@@ -16,6 +18,7 @@ public class Seagull : MonoBehaviour
     private float distanceToTarget;
     private bool targetInRange;
     [SerializeField] private float targetRadius = 3;
+    private Coroutine attackRoutine;
     private void FixedUpdate()
     {
         if (target && !targetInRange)
@@ -34,7 +37,7 @@ public class Seagull : MonoBehaviour
             {
                 targetInRange = true;
                 animator.SetBool("isAttacking",targetInRange);
-                StartCoroutine(AttackRoutine_CO());
+                attackRoutine = StartCoroutine(AttackRoutine_CO());
             }
         }
     }
@@ -88,6 +91,16 @@ public class Seagull : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         LookForEggsTurtle();
+    }
+
+    public void DamageSeagull(Vector3 impact)
+    {
+        if(attackRoutine!=null)
+            StopCoroutine(attackRoutine);
+        direction = (impact - transform.position).normalized;
+        myRigidbody.AddForce(direction*8,ForceMode.Impulse);
+        target = null;
+        Destroy(this,2f);
     }
 
     private void OnTriggerEnter(Collider other)
