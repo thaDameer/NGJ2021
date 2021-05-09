@@ -10,7 +10,6 @@ public class GodRayBooster : MonoBehaviour
     private bool boostConsumed = false;
     [SerializeField] private AudioSource AudioSource;
     [SerializeField] private AudioClip appearClip, disappearClip, boostClip;
-    [SerializeField] private float activeTime = 8;
     public bool godRayActive;
     private GoodrayBoostHandler boostHandler;
     private void Start()

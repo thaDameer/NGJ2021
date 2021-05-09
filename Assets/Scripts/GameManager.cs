@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour
     public TurtleGuardController GuardController => guardController;
     [SerializeField] private ChairController chairController;
     public ChairController ChairController => chairController;
-
+    public int savedTurtles;
     public int GetAmountOfBornTurtles()
     {
         if (EggSpawner.Instance.BornTurtles.Count > 0)
@@ -19,6 +20,11 @@ public class GameManager : MonoBehaviour
             return 0;
     }
 
+    public void SavedTurtle()
+    {
+        savedTurtles++;
+        UIManager.Instance.UpdateSavedTurtles();
+    }
     private void Awake()
     {
         if (Instance == null)

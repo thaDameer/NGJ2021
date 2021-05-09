@@ -90,7 +90,6 @@ public class GuardWalking : State
         else
         {
             transitionToWalk = 0;
-            var animationLerp = 0;
             transitionToIdle += Time.deltaTime;
             if (transitionToIdle < transitionDuration)
             {

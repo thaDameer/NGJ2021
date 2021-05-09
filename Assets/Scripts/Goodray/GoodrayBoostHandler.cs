@@ -22,7 +22,7 @@ public class GoodrayBoostHandler : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= spawnTime)
         {
-            GodRayBooster booster = null;
+           
             if (inactiveBoosters.Count > 0)
             {
                 var randomValue = Random.Range(0, inactiveBoosters.Count - 1);

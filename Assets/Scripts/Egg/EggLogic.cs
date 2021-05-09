@@ -55,6 +55,11 @@ public class EggLogic : MonoBehaviour
         StartCoroutine(EggHatch_CO());
     }
 
+    public void GetDamage()
+    {
+        eggHealth -= 1;
+    }
+
     IEnumerator EggHatch_CO()
     {
         eggState = EggState.EggHatching;
