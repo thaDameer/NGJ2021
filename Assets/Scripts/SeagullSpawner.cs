@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class SeagullSpawner : MonoBehaviour
 {
-    [SerializeField] private List<SeagullSpawner> Spawners = new List<SeagullSpawner>();
+    [SerializeField] private List<Transform> spawnTransforms = new List<Transform>();
     [SerializeField] private Seagull seagullPrefab;
     [SerializeField] private float minSpawnTime, maxSpawnTime;
     private float timer;
@@ -22,10 +22,16 @@ public class SeagullSpawner : MonoBehaviour
         timer += Time.deltaTime;
         if(timer < randomTime)
         {
-            var randomSpawner = Random.Range(0, Spawners.Count - 1);
-            var spawn = Spawners[randomSpawner].transform.position;
+            var randomSpawner = Random.Range(0, spawnTransforms.Count - 1);
+            var spawnPos = spawnTransforms[randomSpawner].transform.position;
             var clone = Instantiate(seagullPrefab);
-            clone.
+            clone.transform.position = spawnPos;
+            //clone.
         }
     }
+}
+
+interface ITurtle
+{
+    
 }

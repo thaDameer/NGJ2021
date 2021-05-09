@@ -65,9 +65,10 @@ public class EggLogic : MonoBehaviour
         eggState = EggState.EggHatching;
         eggAnimator.SetTrigger("EggHatch");
         yield return new WaitForSeconds(0.5f);
-        var turtleClone = Instantiate(turtlePrefab);
+        var turtleClone = Instantiate(turtlePrefab,transform);
         turtleClone.transform.position = transform.position;
         turtleClone.SpawnTurtle();
+        Destroy(this);
         //spawn turtle
     }
 }
