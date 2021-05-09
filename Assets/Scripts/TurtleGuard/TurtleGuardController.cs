@@ -31,6 +31,7 @@ public class TurtleGuardController : Actor
     #endregion
 
     private Collider[] colliders;
+    private bool isDead = false;
     private void Awake()
     {
         currentEnergy = maxEnergy;
@@ -43,6 +44,8 @@ public class TurtleGuardController : Actor
     
     public override void Update()
     {
+        if(isDead) return;
+        
         base.Update();
         ControllerInputs();
         if (interactKeyDown)
@@ -141,10 +144,15 @@ public class TurtleGuardController : Actor
 
     public void DrainingEnergy()
     {
-       currentEnergy -= drainMultiplier * Time.fixedDeltaTime;
-       ClampCurrentEnergy();
-       var percent = GetEnergyPercent();
-       UIManager.Instance.UpdateGuardDrainingMeter(percent, transform);
+        if (currentEnergy <= 0)
+        {
+            UIManager.Instance.ActivateDeathScreen();
+            isDead = true;
+        }
+        currentEnergy -= drainMultiplier * Time.fixedDeltaTime;
+        ClampCurrentEnergy();
+        var percent = GetEnergyPercent();
+        UIManager.Instance.UpdateGuardDrainingMeter(percent, transform);
     }
 
     public void GainingEnergy()

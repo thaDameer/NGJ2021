@@ -11,6 +11,9 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    [SerializeField] private Canvas endScreen;
+
+    [SerializeField]private  TMP_Text winText;
     [SerializeField] private EnergyMeter guardEnergyMeter;
     [SerializeField] private Canvas gameplayCanvas;
     [SerializeField] private TMP_Text bornTurtleCounter;
@@ -47,6 +50,17 @@ public class UIManager : MonoBehaviour
         savedTurtlesCounter.text = savedTurtles + GameManager.Instance.savedTurtles;
         savedTurtlesCounter.transform.DOScale(Vector3.one, 0.4f);
         
+    }
+
+    public void ActivateDeathScreen()
+    {
+        winText.text = "GAME OVER";
+        endScreen.gameObject.SetActive(true);
+    }
+    public void ActivateWinScreen()
+    {
+        winText.text = "You saved "+GameManager.Instance.savedTurtles+"!!";
+        endScreen.gameObject.SetActive(true);
     }
     public void UpdateGuardDrainingMeter(float percent, Transform characterTransform)
     {

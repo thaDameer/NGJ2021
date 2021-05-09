@@ -10,6 +10,7 @@ public class EggSpawner : MonoBehaviour
 {
     public static EggSpawner Instance;
     [SerializeField]private List<EggLogic> eggs = new List<EggLogic>();
+    public List<EggLogic> Eggs => eggs;
     [SerializeField] private List<EggLogic> spawnedEggs = new List<EggLogic>();
     [SerializeField] private List<Turtle> bornTurtles;
     public List<Turtle> BornTurtles => bornTurtles;
@@ -85,7 +86,7 @@ public class EggSpawner : MonoBehaviour
         if(bornTurtles.Count <=0) return;
         for (int i = 0; i < bornTurtles.Count; i++)
         {
-            if (spawnedEggs[i] == turtle)
+            if (bornTurtles[i] == turtle)
             {
                 bornTurtles.RemoveAt(i);
             }

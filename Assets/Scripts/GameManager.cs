@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     public void SavedTurtle()
     {
+        if(EggSpawner.Instance.Eggs.Count <= 0)
+            UIManager.Instance.ActivateWinScreen();
         savedTurtles++;
         UIManager.Instance.UpdateSavedTurtles();
     }

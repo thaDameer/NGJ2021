@@ -64,9 +64,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eggs: []
+  spawnedEggs: []
   bornTurtles: []
-  minTime: 0
-  maxTime: 0
+  minTime: 5
+  maxTime: 8
 --- !u!1001 &896592541772293168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -398,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8971405386040251768, guid: f76b5465ca522c047bacf475a7f2d347, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -35
+      value: -32.32
       objectReference: {fileID: 0}
     - target: {fileID: 8971405386040251768, guid: f76b5465ca522c047bacf475a7f2d347, type: 3}
       propertyPath: m_LocalRotation.w
