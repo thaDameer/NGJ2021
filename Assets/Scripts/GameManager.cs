@@ -11,6 +11,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ChairController chairController;
     public ChairController ChairController => chairController;
 
+    public int GetAmountOfBornTurtles()
+    {
+        if (EggSpawner.Instance.BornTurtles.Count > 0)
+            return EggSpawner.Instance.BornTurtles.Count;
+        else
+            return 0;
+    }
 
     private void Awake()
     {

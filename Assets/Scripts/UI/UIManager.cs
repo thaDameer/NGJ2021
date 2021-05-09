@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+using System.Linq;
+using DG.Tweening;
 using States;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -10,6 +13,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     [SerializeField] private EnergyMeter guardEnergyMeter;
     [SerializeField] private Canvas gameplayCanvas;
+    [SerializeField] private TMP_Text bornTurtleCounter;
+    private string bornTurtles = "Hatched turtles: ";
     public Canvas GameplayCanvas => gameplayCanvas;
     private void Awake()
     {
@@ -20,6 +25,18 @@ public class UIManager : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        bornTurtleCounter.text = bornTurtles + 0;
+    }
+
+    public void UpdateHatchedCounter()
+    {
+        var message = bornTurtles + GameManager.Instance.GetAmountOfBornTurtles();
+        bornTurtleCounter.transform.localScale = Vector3.one * 0.5f;
+        bornTurtleCounter.rectTransform.DOScale(Vector3.one, 0.2f).SetEase(Ease.InCubic);
+        bornTurtleCounter.text = message;
+    }
     public void UpdateGuardDrainingMeter(float percent, Transform characterTransform)
     {
         guardEnergyMeter.UpdateEnergyDrain(percent,characterTransform);

@@ -68,7 +68,7 @@ public class GuardWalking : State
 
     private float transitionToWalk = 0;
     private float transitionToIdle = 0;
-    private float transitionDuration = 0.5f;
+    private float transitionDuration = 0.2f;
 
     void MovementAnimations()
     {

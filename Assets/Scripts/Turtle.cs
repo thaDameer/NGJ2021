@@ -30,6 +30,8 @@ public class Turtle : MonoBehaviour
     public void SpawnTurtle()
     {
         //DO animation?
+        EggSpawner.Instance.AddHatchedTurtle(this);
+        UIManager.Instance.UpdateHatchedCounter();
         StartCoroutine(SpawnRoutine_CO());
     }
 
