@@ -9,7 +9,7 @@ public class SeagullSpawner : MonoBehaviour
     [SerializeField] private List<Transform> spawnTransforms = new List<Transform>();
     [SerializeField] private Seagull seagullPrefab;
     [SerializeField] private float minSpawnTime, maxSpawnTime;
-    private float timer;
+    private float timer = 0;
     private float randomTime;
     
     private void Start()
@@ -26,6 +26,7 @@ public class SeagullSpawner : MonoBehaviour
             var spawnPos = spawnTransforms[randomSpawner].transform.position;
             var clone = Instantiate(seagullPrefab);
             clone.transform.position = spawnPos;
+            timer = 0;
             //clone.
         }
     }
